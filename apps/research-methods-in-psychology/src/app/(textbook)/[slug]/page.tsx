@@ -19,6 +19,7 @@ import { TextbookToc } from "@textbook/textbook-toc";
 
 import { MobilePopup } from "@/components/mobile-popup";
 import { PageProvider } from "@/components/provider/page-provider";
+import { Sidebar, SidebarLayout, SidebarHeader, SidebarTrigger, SidebarContent} from "@/components/sidebar";
 import { getSession } from "@/lib/auth";
 import { getUserCondition } from "@/lib/auth/conditions";
 import { Condition, isProduction } from "@/lib/constants";
@@ -50,72 +51,86 @@ export default async function Page({ params }: { params: { slug: string } }) {
   });
 
   return (
-    <PageProvider condition={userCondition} page={page} pageStatus={pageStatus}>
-      <main
-        id={Elements.TEXTBOOK_MAIN_WRAPPER}
-        className="mx-auto max-w-[1800px]"
-      >
-        <div id={Elements.TEXTBOOK_NAV}>
-          <ScrollArea className="h-full w-full px-6 py-6 lg:py-8">
-            <TextbookToc
-              page={page}
-              userPageSlug={userPageSlug}
-              userFinished={userFinished}
-            />
-          </ScrollArea>
-        </div>
-        <MobilePopup />
+    <SidebarLayout>
+      <div style={{ position: "fixed", zIndex: 50 }}>
+        <SidebarTrigger />
+      </div>
+      
+      <PageProvider condition={userCondition} page={page} pageStatus={pageStatus}>
+        <main
+          id={Elements.TEXTBOOK_MAIN_WRAPPER}
+          className="mx-auto max-w-[1800px]"
+        >
+          <div> </div>
+          <Sidebar
+          className="sidebar"
+          >
+            <SidebarHeader>Textbook Navigation</SidebarHeader>
+            <SidebarContent>
+              <div id={Elements.TEXTBOOK_NAV}>
+                <TextbookToc
+                    page={page}
+                    userPageSlug={userPageSlug}
+                    userFinished={userFinished}
+                  />
+              </div> 
+            </SidebarContent>
+          </Sidebar>
 
-        <div id={Elements.TEXTBOOK_MAIN} tabIndex={-1}>
-          <PageTitle className="mb-8">{page.title}</PageTitle>
-          <PageContent title={page.title} html={page.html} />
-          <SelectionPopover user={user} pageSlug={pageSlug} />
-          <Pager pageIndex={page.order} userPageSlug={user?.pageSlug ?? null} />
-          <p className="mt-4 text-right text-sm text-muted-foreground">
-            <span>Last updated at </span>
-            <time>{page.last_modified}</time>
-          </p>
-        </div>
+          <MobilePopup />
 
-        <aside id={Elements.PAGE_NAV} aria-label="table of contents">
-          <div className="sticky top-20 -mt-10">
-            <ScrollArea className="pb-10">
-              <div className="sticky top-16 -mt-10 h-[calc(100vh-3.5rem)] py-12">
-                <PageToc chunks={page.chunks} />
-                <div className="mt-8 flex flex-col gap-1">
-                  <PageInfo pageSlug={pageSlug} user={user} />
-                  <NoteCount />
-                </div>
-              </div>
-            </ScrollArea>
+          <div id={Elements.TEXTBOOK_MAIN} tabIndex={-1}>
+            <PageTitle className="mb-8">{page.title}</PageTitle>
+            <PageContent title={page.title} html={page.html} />
+            {user && page.summary ? (
+              <PageAssignments
+                pageSlug={pageSlug}
+                pageStatus={pageStatus}
+                user={user}
+                condition={userCondition}
+              />
+            ) : null}
+            <SelectionPopover user={user} pageSlug={pageSlug} />
+            <Pager pageIndex={page.order} userPageSlug={user?.pageSlug ?? null} />
+            <p className="mt-4 text-right text-sm text-muted-foreground">
+              <span>Last updated at </span>
+              <time>{page.last_modified}</time>
+            </p>
           </div>
-        </aside>
-      </main>
+{/* 
+          <aside id={Elements.PAGE_NAV} aria-label="table of contents">
+            <div className="sticky top-20 -mt-10">
+              <ScrollArea className="pb-10">
+                <div className="sticky top-16 -mt-10 h-[calc(100vh-3.5rem)] py-12">
+                  <PageToc chunks={page.chunks} />
+                  <div className="mt-8 flex flex-col gap-1">
+                    <PageInfo pageSlug={pageSlug} user={user} />
+                    <NoteCount />
+                  </div>
+                </div>
+              </ScrollArea>
+            </div>
+          </aside> */}
+        </main>
 
-      <Suspense fallback={<ChatLoader.Skeleton />}>
-        <ChatLoader user={user} pageSlug={pageSlug} pageTitle={page.title} />
-      </Suspense>
+        <Suspense fallback={<ChatLoader.Skeleton />}>
+          <ChatLoader user={user} pageSlug={pageSlug} pageTitle={page.title} />
+        </Suspense>
 
-      {user ? <NoteLoader pageSlug={pageSlug} /> : null}
-      {user && page.summary ? (
-        <PageAssignments
+        {user ? <NoteLoader pageSlug={pageSlug} /> : null}
+        
+
+        {isProduction ? (
+          <PageStatusModal user={user} pageStatus={pageStatus} />
+        ) : null}
+        <QuestionControl
+          userId={userId}
           pageSlug={pageSlug}
-          pageStatus={pageStatus}
-          user={user}
+          hasAssignments={page.assignments.length > 0}
           condition={userCondition}
         />
-      ) : null}
-
-      {isProduction ? (
-        <PageStatusModal user={user} pageStatus={pageStatus} />
-      ) : null}
-      <QuestionControl
-        userId={userId}
-        pageSlug={pageSlug}
-        hasAssignments={page.assignments.length > 0}
-        condition={userCondition}
-      />
-      {user ? <EventTracker pageSlug={pageSlug} /> : null}
-    </PageProvider>
+        {user ? <EventTracker pageSlug={pageSlug} /> : null}
+      </PageProvider>
+    </SidebarLayout>
   );
 }

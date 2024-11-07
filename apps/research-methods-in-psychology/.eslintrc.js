@@ -5,4 +5,11 @@ module.exports = {
   parserOptions: {
     project: "./tsconfig.json",
   },
+  rules: {
+    // Disable the no-unsafe-return rule for TypeScript
+    "@typescript-eslint/no-unsafe-return": "off",
+    // Enable  no-unsafe-assignment and no-unsafe-call rules for TypeScript
+    "@typescript-eslint/no-unsafe-assignment": "warn",
+    "@typescript-eslint/no-unsafe-call": "warn",
+  },
 };

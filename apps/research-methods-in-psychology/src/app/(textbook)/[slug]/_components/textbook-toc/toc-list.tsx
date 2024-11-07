@@ -55,7 +55,7 @@ export function TextbookTocList({ page, pages }: Props) {
               className="pb-0"
             >
               <AccordionItem value={item.slug} className="border-none">
-                <AccordionTrigger className="px-2 py-4 text-left text-base hover:bg-accent hover:no-underline lg:text-lg 2xl:text-xl">
+                <AccordionTrigger className="px-2 py-4 text-left text-base hover:bg-accent hover:no-underline lg:text-sm 2xl:text-lg"> {/*Change here*/}
                   {item.title}
                 </AccordionTrigger>
                 <AccordionContent className="pb-0">

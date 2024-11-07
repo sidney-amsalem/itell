@@ -1,0 +1,4 @@
+{
+    "extends": "./apps/research-methods-in-psychology/tsconfig.json"
+}
+  
