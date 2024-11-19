@@ -8,17 +8,15 @@ import { allPagesSorted } from "@/lib/pages/pages.server";
 import { CommandMenu } from "./command-menu";
 import { ContinueReading } from "./continue-reading";
 import { MobileNav } from "./mobile-nav";
-import { ScrollProgress } from "./scroll-progress";
 import { SiteNav } from "./site-nav";
 import { ThemeToggle } from "./theme-toggle";
 import { UserAccountNav } from "./user-account-nav";
 
 type Props = {
-  scrollProgress?: boolean;
   read?: boolean;
 };
 
-export async function MainNav({ scrollProgress, read }: Props) {
+export async function MainNav({ read }: Props) {
   const { user } = await getSession();
 
   return (
@@ -58,8 +56,6 @@ export async function MainNav({ scrollProgress, read }: Props) {
           <UserAccountNav user={user} />
         </div>
       </div>
-
-      {scrollProgress ? <ScrollProgress /> : null}
     </SiteNav>
   );
 }

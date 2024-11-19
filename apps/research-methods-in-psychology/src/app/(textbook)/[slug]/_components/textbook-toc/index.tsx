@@ -13,7 +13,7 @@ type Props = {
 
 export type TocPagesWithStatus = ReturnType<typeof getPagesWithStatus>;
 
-const getPagesWithStatus = (
+export const getPagesWithStatus = (
   userPageSlug: string | null,
   userFinished: boolean
 ) => {
@@ -53,3 +53,6 @@ export function TextbookToc({ page, userPageSlug, userFinished }: Props) {
     </>
   );
 }
+
+export { TextbookTocList } from "./toc-list";
+export { PageControl } from "./page-control";

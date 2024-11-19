@@ -51,7 +51,7 @@ const SidebarLayout = React.forwardRef<
         data-sidebar={state}
         style={
           {
-            "--sidebar-width": "16rem",
+            "--sidebar-width": "20rem",
           } as React.CSSProperties
         }
         className={cn(
@@ -67,6 +67,7 @@ const SidebarLayout = React.forwardRef<
 });
 SidebarLayout.displayName = "SidebarLayout";
 
+
 const SidebarTrigger = React.forwardRef<
   HTMLButtonElement,
   React.ComponentProps<"button">
@@ -77,9 +78,9 @@ const SidebarTrigger = React.forwardRef<
     <Button
       ref={ref}
       id="sidebar-trigger"
-      variant="ghost"
+      variant="outline"
       size="icon"
-      className={cn("size-6", className)}
+      className={cn("size-10", className)}
       onClick={() => {
         onOpenChange(!open);
       }}
@@ -113,7 +114,7 @@ function Sidebar({ children, className }: React.ComponentProps<"div">) {
   }
 
   return (
-    <aside className="fixed inset-y-0 left-0 z-50 hidden w-[--sidebar-width] transition-all duration-300 ease-in-out md:block [[data-sidebar=closed]_&]:left-[calc(var(--sidebar-width)*-1)]">
+    <aside className="fixed inset-y-0 left-0 z-49 hidden w-[--sidebar-width] transition-all duration-300 ease-in-out md:block [[data-sidebar=closed]_&]:left-[calc(var(--sidebar-width)*-1)]" style={{ marginTop: "var(--nav-height)", height: `calc(100vh - var(--nav-height))` }}>
       <SidebarInner>{children}</SidebarInner>
     </aside>
   );
@@ -148,7 +149,7 @@ const SidebarFooter = React.forwardRef<
   return (
     <div
       ref={ref}
-      className={cn("flex items-center border-t px-2.5 py-2", className)}
+      className={cn("flex items-center border-t px-2.5 py-4", className)}
       {...props}
     />
   );
@@ -205,5 +206,6 @@ export {
   SidebarLabel,
   SidebarLayout,
   SidebarTrigger,
+  SidebarContext,
   useSidebar,
 };

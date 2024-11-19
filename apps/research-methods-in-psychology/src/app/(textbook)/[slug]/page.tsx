@@ -2,7 +2,6 @@ import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { Elements } from "@itell/constants";
 import { PageTitle } from "@itell/ui/page-title";
-import { ScrollArea } from "@itell/ui/scroll-area";
 import { ChatLoader } from "@textbook/chat-loader";
 import { EventTracker } from "@textbook/event-tracker";
 import { NoteCount } from "@textbook/note/note-count";
@@ -11,15 +10,16 @@ import { PageAssignments } from "@textbook/page-assignments";
 import { PageContent } from "@textbook/page-content";
 import { PageInfo } from "@textbook/page-info";
 import { PageStatusModal } from "@textbook/page-status-modal";
-import { PageToc } from "@textbook/page-toc";
 import { Pager } from "@textbook/pager";
 import { QuestionControl } from "@textbook/question/question-control";
 import { SelectionPopover } from "@textbook/selection-popover";
-import { TextbookToc } from "@textbook/textbook-toc";
+import { getPagesWithStatus, TextbookTocList, PageControl} from "@textbook/textbook-toc";
+import { PageNav } from "@textbook/page-nav";
+import { CurrentSection } from "@textbook/current-section";
 
 import { MobilePopup } from "@/components/mobile-popup";
 import { PageProvider } from "@/components/provider/page-provider";
-import { Sidebar, SidebarLayout, SidebarHeader, SidebarTrigger, SidebarContent} from "@/components/sidebar";
+import { Sidebar, SidebarLayout, SidebarFooter, SidebarItem, SidebarTrigger, SidebarContent} from "@/components/sidebar";
 import { getSession } from "@/lib/auth";
 import { getUserCondition } from "@/lib/auth/conditions";
 import { Condition, isProduction } from "@/lib/constants";
@@ -51,31 +51,35 @@ export default async function Page({ params }: { params: { slug: string } }) {
   });
 
   return (
-    <SidebarLayout>
-      <div style={{ position: "fixed", zIndex: 50 }}>
-        <SidebarTrigger />
-      </div>
-      
-      <PageProvider condition={userCondition} page={page} pageStatus={pageStatus}>
+    <PageProvider condition={userCondition} page={page} pageStatus={pageStatus}>
+      <SidebarLayout defaultOpen>
+        <div className="fixed z-50 mt-10 m-3">
+          <SidebarTrigger />
+        </div>
         <main
           id={Elements.TEXTBOOK_MAIN_WRAPPER}
           className="mx-auto max-w-[1800px]"
         >
-          <div> </div>
-          <Sidebar
-          className="sidebar"
+          <PageNav
+            leftChild={<CurrentSection chunks={page.chunks} />}
           >
-            <SidebarHeader>Textbook Navigation</SidebarHeader>
-            <SidebarContent>
+            <PageInfo pageSlug={pageSlug} user={user} />
+            <NoteCount />
+          </PageNav>
+          <div> </div>
+          <Sidebar className="sidebar h-screen">
+            <SidebarContent className="flex flex-col h-full" >
               <div id={Elements.TEXTBOOK_NAV}>
-                <TextbookToc
-                    page={page}
-                    userPageSlug={userPageSlug}
-                    userFinished={userFinished}
-                  />
-              </div> 
+                <SidebarItem className="mb-auto">
+                  <TextbookTocList page={page} pages={getPagesWithStatus(userPageSlug, userFinished)} />
+                </SidebarItem>
+              </div>
             </SidebarContent>
+            <SidebarFooter className="h-30">
+              <PageControl assignment={page.summary} pageSlug={page.slug} />
+            </SidebarFooter>
           </Sidebar>
+
 
           <MobilePopup />
 
@@ -97,20 +101,6 @@ export default async function Page({ params }: { params: { slug: string } }) {
               <time>{page.last_modified}</time>
             </p>
           </div>
-{/* 
-          <aside id={Elements.PAGE_NAV} aria-label="table of contents">
-            <div className="sticky top-20 -mt-10">
-              <ScrollArea className="pb-10">
-                <div className="sticky top-16 -mt-10 h-[calc(100vh-3.5rem)] py-12">
-                  <PageToc chunks={page.chunks} />
-                  <div className="mt-8 flex flex-col gap-1">
-                    <PageInfo pageSlug={pageSlug} user={user} />
-                    <NoteCount />
-                  </div>
-                </div>
-              </ScrollArea>
-            </div>
-          </aside> */}
         </main>
 
         <Suspense fallback={<ChatLoader.Skeleton />}>
@@ -130,7 +120,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
           condition={userCondition}
         />
         {user ? <EventTracker pageSlug={pageSlug} /> : null}
-      </PageProvider>
-    </SidebarLayout>
+      </SidebarLayout>
+    </PageProvider>
   );
 }

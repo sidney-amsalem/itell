@@ -42,7 +42,7 @@ export async function PageControl({
 }) {
   const { user } = await getSession();
   return (
-    <div className="mt-12 space-y-2">
+    <div className="mt-auto space-y-2">
       <p className="sr-only">page control</p>
       {user && isAdmin(user.role) ? (
         <AdminTools user={user} pageSlug={pageSlug} />

@@ -1,6 +1,6 @@
 "use client";
 
-import { startTransition, useOptimistic } from "react";
+import { startTransition, useOptimistic, useState } from "react";
 import { Elements } from "@itell/constants";
 import {
   Accordion,
@@ -20,6 +20,7 @@ type Props = {
 
 export function TextbookTocList({ page, pages }: Props) {
   const [activePage, setActivePage] = useOptimistic(page.slug);
+  const [openItem, setOpenItem] = useState<string | undefined>(undefined); 
   return (
     <nav aria-label="textbook primary">
       <a className="sr-only" href={`#${Elements.TEXTBOOK_MAIN}`}>
@@ -50,6 +51,8 @@ export function TextbookTocList({ page, pages }: Props) {
             <Accordion
               type="single"
               collapsible
+              value={openItem}
+              onValueChange={setOpenItem}
               key={item.title}
               defaultValue={page.parent?.slug}
               className="pb-0"
