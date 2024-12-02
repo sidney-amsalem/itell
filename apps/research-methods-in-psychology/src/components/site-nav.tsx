@@ -17,7 +17,7 @@ export function SiteNav({
     <header
       id={Elements.SITE_NAV}
       className={cn(
-        "sticky top-0 z-50 w-full border-b border-border/40 bg-background",
+        "fixed top-0 z-50 w-full border-b border-border/40 bg-background",
         className
       )}
       {...rest}

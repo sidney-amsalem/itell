@@ -11,7 +11,7 @@ export function PageNav({ leftChild, children }: PageNavProps) {
   return (
     <header 
       className={cn(
-        "fixed top-0 z-50 bg-background border-b h-8 flex flex-col items-center w-full"
+        "fixed top-0 z-50 bg-background border-b border-t h-10 flex flex-col items-center w-full"
       )}
       style={{ marginTop: "var(--nav-height)" }}
       

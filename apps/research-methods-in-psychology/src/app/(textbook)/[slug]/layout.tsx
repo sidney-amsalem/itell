@@ -45,10 +45,10 @@ export const generateMetadata = ({ params }: { params: { slug: string } }) => {
   };
 };
 
-export default async function ({ children }: { children: React.ReactNode }) {
+export default function ({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <MainNav scrollProgress />
+      <MainNav />
       {children}
     </>
   );

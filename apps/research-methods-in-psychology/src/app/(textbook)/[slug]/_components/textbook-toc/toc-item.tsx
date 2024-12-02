@@ -82,6 +82,6 @@ const getPageState = ({
   const label = `${title} - ${
     status.unlocked ? "Unlocked" : visible ? "Visible" : "Locked"
   }`;
-  const icon = status.unlocked ? "✅" : status.latest ? "" : "🔒";
+  const icon = status.unlocked ? "" : status.latest ? "" : "🔒";
   return { label, icon, visible };
 };

@@ -53,19 +53,21 @@ export default async function Page({ params }: { params: { slug: string } }) {
   return (
     <PageProvider condition={userCondition} page={page} pageStatus={pageStatus}>
       <SidebarLayout defaultOpen>
-        <div className="fixed z-50 mt-10 m-3">
-          <SidebarTrigger />
+
+       <PageNav
+          leftChild={<CurrentSection chunks={page.chunks} />}
+        >
+          <PageInfo pageSlug={pageSlug} user={user} />
+          <NoteCount />
+        </PageNav>
+        <div className="fixed z-50 ml-3 mt-20 pt-9">
+          <SidebarTrigger/>
         </div>
+
         <main
           id={Elements.TEXTBOOK_MAIN_WRAPPER}
           className="mx-auto max-w-[1800px]"
         >
-          <PageNav
-            leftChild={<CurrentSection chunks={page.chunks} />}
-          >
-            <PageInfo pageSlug={pageSlug} user={user} />
-            <NoteCount />
-          </PageNav>
           <div> </div>
           <Sidebar className="sidebar h-screen">
             <SidebarContent className="flex flex-col h-full" >
@@ -84,7 +86,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
           <MobilePopup />
 
           <div id={Elements.TEXTBOOK_MAIN} tabIndex={-1}>
-            <PageTitle className="mb-8">{page.title}</PageTitle>
+            <PageTitle className="mb-8 pt-10 mt-10">{page.title}</PageTitle>
             <PageContent title={page.title} html={page.html} />
             {user && page.summary ? (
               <PageAssignments

@@ -25,9 +25,9 @@ export async function MainNav({ read }: Props) {
         <div className="flex items-center gap-4">
           <Link href="/" className="flex items-center gap-6">
             <Image
-              src="/images/itell.svg"
+              src="/images/itell.png"
               alt="itell logo"
-              width={24}
+              width={45}
               height={32}
             />
             <span className="hidden font-bold md:inline-block">
