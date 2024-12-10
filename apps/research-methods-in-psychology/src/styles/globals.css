@@ -25,7 +25,9 @@
 .driver-active .question-container {
   display: none;
 }
-
+#chatbot-container{
+  width: 250px;
+}
 .driver-active #textbook-main-wrapper {
   grid-template-columns: 1fr;
   margin-right: auto;
@@ -155,4 +157,22 @@
   [popover] {
     animation: none;
   }
+}
+.sidebar-container {
+  scroll-padding-top: 75px !important; /* Offset to account for the sticky header */ 
+}
+
+.sidebar {
+  position: sticky;
+  top: 75px; /* Height of the sticky header */
+  width: 25%;
+  padding: 16px;
+  height: calc(100vh - 40px); /* Adjust height as per layout */
+  overflow-y: auto;
+  z-index: 40;
+  color: black;
+}
+
+.anchor-offset {
+  scroll-margin-top: 5rem;
 }

@@ -8,7 +8,7 @@ condition: stairs
 
 This document provides guidelines for using Intelligent Texts for Enhanced Lifelong Learning (iTELL). iTELL is a webapp that presents text-based learning materials alongside videos and learning activities. It includes an AI assistant as well as automated feedback.
 
-### 1. Getting Started
+### <a id="gettingStarted" className="anchor-offset"></a>1. Getting Started
 
 #### Sign in
 
@@ -24,7 +24,7 @@ This document provides guidelines for using Intelligent Texts for Enhanced Lifel
 Sign in to iTELL.
 </i-image>
 
-### 2. Making Progress in iTELL
+### <a id="makingProgress" className="anchor-offset"></a>2. Making Progress in iTELL
 
 #### Pages
 
@@ -108,7 +108,7 @@ If your summary fails to pass the evaluation, iTELL's conversational agent (iTEL
 
 - Your past summaries will be accessible from your dashboard.
 
-### 3. iTELL AI
+### <a id="iTellAI" className="anchor-offset"></a>3. iTELL AI
 
 #### Starting a Conversation
 
@@ -145,7 +145,7 @@ iTELL AI will only automatically redirect you for re-reading one time per page. 
 - Like any other conversational agents, iTELL AI can make mistakes. Make sure to double check any important information.
 - Some chapters in this iTELL volume will not support STAIRS
 
-### 4. Dashboard
+### <a id="dashboard" className="anchor-offset"></a>4. Dashboard
 
 #### Statistics
 
@@ -174,7 +174,7 @@ You will be able to access your past summaries in the summaries tab (**1**) of y
 
 In the `Questions` tab, you will have access to all the constructed response items that you have responded to while reading the text. Each row will contain your answer to a constructed response item. Clicking on the row will take you to the relevant chunk. The emojis to the right side denotes your score (poor, fair, excellent).
 
-### 5. Notes and Highlights
+### <a id="notes" className="anchor-offset"></a>5. Notes and Highlights
 
 You can leave notes and highlight parts of the textbook for future reference. Click and drag through the text to activate the notes and highlights function.
 
@@ -223,7 +223,7 @@ You can also click on the created notes to edit them. You can change their color
   scheme.
 </Image>
 
-### 6. Other Features
+### <a id="otherFeatures" className="anchor-offset"></a>6. Other Features
 
 #### Search Bar
 
@@ -250,7 +250,7 @@ Transition to dark mode by clicking on the sun icon on the top right corner (**1
 </Image>
 <Image src="/images/userguide/userguide23.png">Dark mode enabled.</Image>
 
-### 6. Others
+### <a id="others" className="anchor-offset"></a>6. Others
 
 #### Notes
 

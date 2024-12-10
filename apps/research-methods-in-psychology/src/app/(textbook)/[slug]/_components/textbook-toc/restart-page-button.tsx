@@ -25,8 +25,8 @@ export function RestartPageButton({ pageSlug }: { pageSlug: string }) {
       pending={pending}
     >
       <span className="flex w-full items-center justify-start gap-2 py-2 xl:gap-4">
-        <RotateCcwIcon className="size-4 xl:size-6" />
-        Reset
+        <RotateCcwIcon className="size-4 xl:size-4" />
+        <span className="text-sm">Reset</span>
       </span>
     </Button>
   );

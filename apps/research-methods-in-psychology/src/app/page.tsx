@@ -14,8 +14,8 @@ export default function Page() {
     <>
       <MainNav read />
       <main
-        className="mx-auto max-w-3xl flex-1 space-y-6 px-6 py-8 md:px-10 lg:px-16"
-        id={Elements.TEXTBOOK_MAIN}
+className="mx-auto max-w-3xl flex-1 space-y-6 px-6 mt-16 pb-8 md:px-10 lg:px-16"
+id={Elements.TEXTBOOK_MAIN}
         tabIndex={-1}
       >
         <HtmlRenderer html={home.html} />

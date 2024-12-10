@@ -49,8 +49,8 @@ export async function PageControl({
       ) : null}
       {assignment ? (
         <AnchorLink
-          icon={<PencilIcon className="size-4 xl:size-6" />}
-          text="Assignment"
+          icon={<PencilIcon className="size-4 xl:size-4" />}
+          text={<span className="text-sm">Assignment</span>}          
           href={`#${Elements.PAGE_ASSIGNMENTS}`}
           aria-label="assignments for this page"
         />
@@ -58,8 +58,8 @@ export async function PageControl({
       <RestartPageButton pageSlug={pageSlug} />
 
       <AnchorLink
-        icon={<ArrowUpIcon className="size-4 xl:size-6" />}
-        text="Back to top"
+        icon={<ArrowUpIcon className="size-4 xl:size-4" />}
+        text={<span className="text-sm">Back to top</span>}          
         href={`#${Elements.PAGE_TITLE}`}
       />
     </div>

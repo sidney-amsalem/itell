@@ -25,10 +25,11 @@ import { routes } from "@/lib/navigation";
 import { redirectWithSearchParams } from "@/lib/utils";
 
 type Props = {
-  searchParams?: Record<string, string>;
+  searchParams?: Promise<Record<string, string>>;
 };
 
-export default async function ({ searchParams }: Props) {
+export default async function (props: Props) {
+  const searchParams = await props.searchParams;
   const { user } = await getSession();
   const join_class_code =
     routes.settings.$parseSearchParams(searchParams).join_class_code;

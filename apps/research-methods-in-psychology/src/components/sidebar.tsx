@@ -122,7 +122,7 @@ function Sidebar({ children, className }: React.ComponentProps<"div">) {
 
 function SidebarInner({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex h-full flex-col border-r bg-background" > {/* style={{backgroundColor: "#f9f9f9"}} */}
+    <div className="flex h-full flex-col border-r bg-background" style={{backgroundColor: "#f9f9f9"}} >
       {children}
     </div>
   );
